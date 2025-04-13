@@ -24,7 +24,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 /**
  * 商品管理Controller
  * 
- * @author ruoyi
+ * @author yizhu
  * @date 2025-04-12
  */
 @RestController
@@ -35,7 +35,7 @@ public class MallProductController extends BaseController
     private IMallProductService mallProductService;
 
     /**
-     * 查询商品管理列表
+     * 查询商品列表
      */
     @PreAuthorize("@ss.hasPermi('system:MallProduct:list')")
     @GetMapping("/list")
@@ -47,7 +47,7 @@ public class MallProductController extends BaseController
     }
 
     /**
-     * 导出商品管理列表
+     * 导出商品为 Excel，输出到数据库的日志里
      */
     @PreAuthorize("@ss.hasPermi('system:MallProduct:export')")
     @Log(title = "商品管理", businessType = BusinessType.EXPORT)
@@ -60,10 +60,11 @@ public class MallProductController extends BaseController
     }
 
     /**
-     * 获取商品管理详细信息
+     * 查询商品详情
      */
     @PreAuthorize("@ss.hasPermi('system:MallProduct:query')")
     @GetMapping(value = "/{id}")
+//    这个AjaxResult就是Result，包含code，message和data
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
         return success(mallProductService.selectMallProductById(id));
