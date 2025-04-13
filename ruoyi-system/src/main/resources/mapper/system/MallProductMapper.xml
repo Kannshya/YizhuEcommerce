@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.MallProductMapper">
+    
+    <resultMap type="MallProduct" id="MallProductResult">
+        <result property="id"    column="id"    />
+        <result property="merchantUserId"    column="merchant_user_id"    />
+        <result property="name"    column="name"    />
+        <result property="mainImage"    column="main_image"    />
+        <result property="description"    column="description"    />
+        <result property="price"    column="price"    />
+        <result property="stockQuantity"    column="stock_quantity"    />
+        <result property="category"    column="category"    />
+        <result property="status"    column="status"    />
+        <result property="createdTime"    column="created_time"    />
+        <result property="updatedTime"    column="updated_time"    />
+    </resultMap>
+
+    <sql id="selectMallProductVo">
+        select id, merchant_user_id, name, main_image, description, price, stock_quantity, category, status, created_time, updated_time from mall_product
+    </sql>
+
+    <select id="selectMallProductList" parameterType="MallProduct" resultMap="MallProductResult">
+        <include refid="selectMallProductVo"/>
+        <where>  
+            <if test="merchantUserId != null "> and merchant_user_id = #{merchantUserId}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="mainImage != null  and mainImage != ''"> and main_image = #{mainImage}</if>
+            <if test="description != null  and description != ''"> and description = #{description}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="stockQuantity != null "> and stock_quantity = #{stockQuantity}</if>
+            <if test="category != null  and category != ''"> and category = #{category}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="createdTime != null "> and created_time = #{createdTime}</if>
+            <if test="updatedTime != null "> and updated_time = #{updatedTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectMallProductById" parameterType="Long" resultMap="MallProductResult">
+        <include refid="selectMallProductVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertMallProduct" parameterType="MallProduct" useGeneratedKeys="true" keyProperty="id">
+        insert into mall_product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="merchantUserId != null">merchant_user_id,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="mainImage != null">main_image,</if>
+            <if test="description != null">description,</if>
+            <if test="price != null">price,</if>
+            <if test="stockQuantity != null">stock_quantity,</if>
+            <if test="category != null">category,</if>
+            <if test="status != null">status,</if>
+            <if test="createdTime != null">created_time,</if>
+            <if test="updatedTime != null">updated_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="merchantUserId != null">#{merchantUserId},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="mainImage != null">#{mainImage},</if>
+            <if test="description != null">#{description},</if>
+            <if test="price != null">#{price},</if>
+            <if test="stockQuantity != null">#{stockQuantity},</if>
+            <if test="category != null">#{category},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createdTime != null">#{createdTime},</if>
+            <if test="updatedTime != null">#{updatedTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateMallProduct" parameterType="MallProduct">
+        update mall_product
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="merchantUserId != null">merchant_user_id = #{merchantUserId},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="mainImage != null">main_image = #{mainImage},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="stockQuantity != null">stock_quantity = #{stockQuantity},</if>
+            <if test="category != null">category = #{category},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createdTime != null">created_time = #{createdTime},</if>
+            <if test="updatedTime != null">updated_time = #{updatedTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteMallProductById" parameterType="Long">
+        delete from mall_product where id = #{id}
+    </delete>
+
+    <delete id="deleteMallProductByIds" parameterType="String">
+        delete from mall_product where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

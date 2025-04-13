@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.MallAddressMapper">
+    
+    <resultMap type="MallAddress" id="MallAddressResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="address"    column="address"    />
+        <result property="receiverName"    column="receiver_name"    />
+        <result property="phoneNumber"    column="phone_number"    />
+        <result property="isDefault"    column="is_default"    />
+        <result property="createdTime"    column="created_time"    />
+        <result property="updatedTime"    column="updated_time"    />
+    </resultMap>
+
+    <sql id="selectMallAddressVo">
+        select id, user_id, address, receiver_name, phone_number, is_default, created_time, updated_time from mall_address
+    </sql>
+
+    <select id="selectMallAddressList" parameterType="MallAddress" resultMap="MallAddressResult">
+        <include refid="selectMallAddressVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="receiverName != null  and receiverName != ''"> and receiver_name = #{receiverName}</if>
+            <if test="phoneNumber != null  and phoneNumber != ''"> and phone_number = #{phoneNumber}</if>
+            <if test="isDefault != null "> and is_default = #{isDefault}</if>
+            <if test="createdTime != null "> and created_time = #{createdTime}</if>
+            <if test="updatedTime != null "> and updated_time = #{updatedTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectMallAddressById" parameterType="Long" resultMap="MallAddressResult">
+        <include refid="selectMallAddressVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertMallAddress" parameterType="MallAddress" useGeneratedKeys="true" keyProperty="id">
+        insert into mall_address
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="address != null and address != ''">address,</if>
+            <if test="receiverName != null and receiverName != ''">receiver_name,</if>
+            <if test="phoneNumber != null and phoneNumber != ''">phone_number,</if>
+            <if test="isDefault != null">is_default,</if>
+            <if test="createdTime != null">created_time,</if>
+            <if test="updatedTime != null">updated_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="address != null and address != ''">#{address},</if>
+            <if test="receiverName != null and receiverName != ''">#{receiverName},</if>
+            <if test="phoneNumber != null and phoneNumber != ''">#{phoneNumber},</if>
+            <if test="isDefault != null">#{isDefault},</if>
+            <if test="createdTime != null">#{createdTime},</if>
+            <if test="updatedTime != null">#{updatedTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateMallAddress" parameterType="MallAddress">
+        update mall_address
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="receiverName != null and receiverName != ''">receiver_name = #{receiverName},</if>
+            <if test="phoneNumber != null and phoneNumber != ''">phone_number = #{phoneNumber},</if>
+            <if test="isDefault != null">is_default = #{isDefault},</if>
+            <if test="createdTime != null">created_time = #{createdTime},</if>
+            <if test="updatedTime != null">updated_time = #{updatedTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteMallAddressById" parameterType="Long">
+        delete from mall_address where id = #{id}
+    </delete>
+
+    <delete id="deleteMallAddressByIds" parameterType="String">
+        delete from mall_address where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
