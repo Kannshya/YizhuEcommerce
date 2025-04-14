@@ -98,6 +98,7 @@ public class SysRegisterService
         else
         {
             sysUser.setNickName(username);
+            // ！！！！！！！！！！！！！！！！！！！！密码加密！！！！！！！！！！！！！！！！！！！！
             sysUser.setPassword(SecurityUtils.encryptPassword(password));
             if("02".equals(sysUser.getUserType())){
                 // 商户注册后自动设置为禁用 需要审核
