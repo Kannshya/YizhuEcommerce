@@ -19,7 +19,7 @@
 const carouselImages = [
   {
     url: new URL('@/assets/images/carousel0.jpg', import.meta.url).href,
-    title: '问界M9'
+    title: 'WenJie M9'
   },
   {
     url: new URL('@/assets/images/carousel1.jpg', import.meta.url).href,
@@ -34,7 +34,7 @@ const carouselImages = [
 const products = [
   {
     url: new URL('@/assets/images/carousel0.jpg', import.meta.url).href,
-    title: '问界M9'
+    title: 'WenJie M9'
   },
   {
     url: new URL('@/assets/images/carousel1.jpg', import.meta.url).href,

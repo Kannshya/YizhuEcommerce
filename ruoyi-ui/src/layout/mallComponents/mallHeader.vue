@@ -6,19 +6,19 @@
         <el-menu-item index="/mall">
           <template #title>
             <el-icon><House /></el-icon>
-            <span>首页</span>
+            <span>Home</span>
           </template>
         </el-menu-item>
         <el-menu-item index="/cart">
           <template #title>
             <el-icon><ShoppingCart /></el-icon>
-            <span>购物车</span>
+            <span>Cart</span>
           </template>
         </el-menu-item>
         <el-menu-item index="/mall/profile">
           <template #title>
             <el-icon><User /></el-icon>
-            <span>个人中心</span>
+            <span>Account</span>
           </template>
         </el-menu-item>
       </el-menu>
@@ -26,7 +26,7 @@
     <div class="search-box">
       <el-input
         v-model="searchQuery"
-        placeholder="搜索商品..."
+        placeholder="Search for products..."
         class="search-input"
         :prefix-icon="Search"
         @keyup.enter="handleSearch"
@@ -37,31 +37,32 @@
         class="search-button"
         :icon="Search"
         @click="handleSearch"
-      >搜索</el-button>
+      >Search</el-button>
     </div>
     <div class="login">
-    <template v-if="!isLoggedIn">
-      <el-button
-        class="login-button"
-        @click="handleLogin"
-      >登录</el-button>
-    </template>
-    <template v-else>
-      <el-dropdown @command="handleCommand">
-        <span class="user-info" @click="goAccountProfile">
-          个人中心
-        </span>
-        <template #dropdown>
-          <el-dropdown-menu>
-            <el-dropdown-item command="receivingAddress">收货地址</el-dropdown-item>
-            <el-dropdown-item command="logout">退出登录</el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
-    </template>
-  </div>
+      <template v-if="!isLoggedIn">
+        <el-button
+          class="login-button"
+          @click="handleLogin"
+        >Login</el-button>
+      </template>
+      <template v-else>
+        <el-dropdown @command="handleCommand">
+          <span class="user-info" @click="goAccountProfile">
+            Account
+          </span>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item command="receivingAddress">Shipping Address</el-dropdown-item>
+              <el-dropdown-item command="logout">Logout</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+      </template>
+    </div>
   </el-header>
 </template>
+
 
 <script setup>
 import { ref, computed } from 'vue'

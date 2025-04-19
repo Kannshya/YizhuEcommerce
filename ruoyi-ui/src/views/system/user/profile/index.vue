@@ -1,74 +1,65 @@
 <template>
    <div class="app-container">
-      <el-row :gutter="20">
-         <el-col :span="6" :xs="24">
-            <el-card class="box-card">
-               <template v-slot:header>
-                 <div class="clearfix">
-                   <span v-if="state.user.userType === '02'" >商家信息</span>
-                   <span v-else >个人信息</span>
+     <el-row :gutter="20">
+       <el-col :span="6" :xs="24">
+         <el-card class="box-card">
+           <template v-slot:header>
+             <div class="clearfix">
+               <span v-if="state.user.userType === '02'">Merchant Info</span>
+               <span v-else>Profile Info</span>
+             </div>
+           </template>
+           <div>
+             <div class="text-center">
+               <userAvatar />
+             </div>
+             <ul class="list-group list-group-striped">
+               <li class="list-group-item">
+                 <svg-icon icon-class="user" /> Username
+                 <div class="pull-right">{{ state.user.userName }}</div>
+               </li>
+               <li class="list-group-item">
+                 <svg-icon icon-class="phone" /> Phone Number
+                 <div class="pull-right">{{ state.user.phonenumber }}</div>
+               </li>
+               <li class="list-group-item">
+                 <svg-icon icon-class="email" /> Email
+                 <div class="pull-right">{{ state.user.email }}</div>
+               </li>
+               <li class="list-group-item">
+                 <svg-icon icon-class="date" /> Created At
+                 <div class="pull-right">{{ state.user.createTime }}</div>
+               </li>
+               <li v-if="state.user.userType === '02'">
+                 <svg-icon icon-class="date" /> Business License
+                 <div class="pull-right">
+                   <image-preview :src="state.user.businessLicense" :width="200" :height="200"/>
                  </div>
-               </template>
-               <div>
-                  <div class="text-center">
-                     <userAvatar />
-                  </div>
-                  <ul class="list-group list-group-striped">
-                     <li class="list-group-item">
-                        <svg-icon icon-class="user" />用户名称
-                        <div class="pull-right">{{ state.user.userName }}</div>
-                     </li>
-                     <li class="list-group-item">
-                        <svg-icon icon-class="phone" />手机号码
-                        <div class="pull-right">{{ state.user.phonenumber }}</div>
-                     </li>
-                     <li class="list-group-item">
-                        <svg-icon icon-class="email" />用户邮箱
-                        <div class="pull-right">{{ state.user.email }}</div>
-                     </li>
-<!--                     <li class="list-group-item">-->
-<!--                        <svg-icon icon-class="tree" />所属部门-->
-<!--                        <div class="pull-right" v-if="state.user.dept">{{ state.user.dept.deptName }} / {{ state.postGroup }}</div>-->
-<!--                     </li>-->
-<!--                     <li class="list-group-item">-->
-<!--                        <svg-icon icon-class="peoples" />所属角色-->
-<!--                        <div class="pull-right">{{ state.roleGroup }}</div>-->
-<!--                     </li>-->
-                     <li class="list-group-item">
-                        <svg-icon icon-class="date" />创建日期
-                        <div class="pull-right">{{ state.user.createTime }}</div>
-                     </li>
-
-                    <li v-if="state.user.userType === '02'" >
-                      <svg-icon icon-class="date" />营业执照
-                      <div class="pull-right">
-                        <image-preview :src="state.user.businessLicense" :width="200" :height="200"/>
-                      </div>
-                    </li>
-                  </ul>
-               </div>
-            </el-card>
-         </el-col>
-         <el-col :span="18" :xs="24">
-            <el-card>
-               <template v-slot:header>
-                 <div class="clearfix">
-                   <span>基本资料</span>
-                 </div>
-               </template>
-               <el-tabs v-model="activeTab">
-                  <el-tab-pane label="基本资料" name="userinfo">
-                     <userInfo :user="state.user" />
-                  </el-tab-pane>
-                  <el-tab-pane label="修改密码" name="resetPwd">
-                     <resetPwd />
-                  </el-tab-pane>
-               </el-tabs>
-            </el-card>
-         </el-col>
-      </el-row>
+               </li>
+             </ul>
+           </div>
+         </el-card>
+       </el-col>
+       <el-col :span="18" :xs="24">
+         <el-card>
+           <template v-slot:header>
+             <div class="clearfix">
+               <span>Basic Information</span>
+             </div>
+           </template>
+           <el-tabs v-model="activeTab">
+             <el-tab-pane label="Profile Info" name="userinfo">
+               <userInfo :user="state.user" />
+             </el-tab-pane>
+             <el-tab-pane label="Change Password" name="resetPwd">
+               <resetPwd />
+             </el-tab-pane>
+           </el-tabs>
+         </el-card>
+       </el-col>
+     </el-row>
    </div>
-</template>
+ </template> 
 
 <script setup name="Profile">
 import userAvatar from "./userAvatar";

@@ -1,28 +1,28 @@
 <template>
-   <el-form ref="userRef" :model="form" :rules="rules" label-width="80px">
-      <el-form-item label="用户昵称" prop="nickName">
-         <el-input v-model="form.nickName" maxlength="30" />
-      </el-form-item>
-      <el-form-item label="手机号码" prop="phonenumber">
-         <el-input v-model="form.phonenumber" maxlength="11" />
-      </el-form-item>
-      <el-form-item label="邮箱" prop="email">
-         <el-input v-model="form.email" maxlength="50" />
-      </el-form-item>
-      <el-form-item label="性别">
-         <el-radio-group v-model="form.sex">
-            <el-radio value="0">男</el-radio>
-            <el-radio value="1">女</el-radio>
-         </el-radio-group>
-      </el-form-item>
-     <el-form-item  v-if="form.userType === '02'" label="营业执照" prop="businessLicense">
-       <image-upload v-model="form.businessLicense"/>
-     </el-form-item>
-      <el-form-item>
-      <el-button type="primary" @click="submit">保存</el-button>
-      <el-button type="danger" @click="close">关闭</el-button>
-      </el-form-item>
-   </el-form>
+  <el-form ref="userRef" :model="form" :rules="rules" label-width="100px">
+    <el-form-item label="Nickname" prop="nickName">
+      <el-input v-model="form.nickName" maxlength="30" />
+    </el-form-item>
+    <el-form-item label="Phonenum" prop="phonenumber">
+      <el-input v-model="form.phonenumber" maxlength="11" />
+    </el-form-item>
+    <el-form-item label="Email" prop="email">
+      <el-input v-model="form.email" maxlength="50" />
+    </el-form-item>
+    <el-form-item label="Gender">
+      <el-radio-group v-model="form.sex">
+        <el-radio value="0">Male</el-radio>
+        <el-radio value="1">Female</el-radio>
+      </el-radio-group>
+    </el-form-item>
+    <el-form-item v-if="form.userType === '02'" label="Business License" prop="businessLicense">
+      <image-upload v-model="form.businessLicense"/>
+    </el-form-item>
+    <el-form-item>
+      <el-button type="primary" @click="submit">Save</el-button>
+      <el-button type="danger" @click="close">Cancel</el-button>
+    </el-form-item>
+  </el-form>
 </template>
 
 <script setup>

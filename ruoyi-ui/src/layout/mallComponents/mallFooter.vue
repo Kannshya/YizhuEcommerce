@@ -2,26 +2,29 @@
   <el-footer class="footer">
     <div class="footer-content">
       <div class="footer-section">
-        <h4>关于我们</h4>
-        <p>YizhuEcommerce是一个专注于提供优质购物体验的电商平台。</p>
+        <h4>About Us</h4>
+        <p>YizhuEcommerce is an e-commerce platform dedicated to delivering a high-quality shopping experience.</p>
       </div>
       <div class="footer-section">
-        <h4>联系方式</h4>
-        <p>邮箱：jp202121716@qmul.ac.uk</p>
-        <p>地址：英国伦敦玛丽女王大学</p>
+        <h4>Contact</h4>
+        <p>Email: jp202121716@qmul.ac.uk</p>
+        <p>Address: Queen Mary University of London, UK</p>
       </div>
       <div class="footer-section">
-        <h4>快速链接</h4>
-        <el-link type="info" :underline="false" href="/mall">首页</el-link>
-        <el-link type="info" :underline="false" href="/mall">购物车</el-link>
-        <el-link type="info" :underline="false" href="/mall">个人中心</el-link>
+        <h4>Quick Links</h4>
+        <el-link type="info" :underline="false" href="/mall">Home</el-link>
+        <el-link type="info" :underline="false" href="/mall">Cart</el-link>
+        <el-link type="info" :underline="false" href="/mall">Account</el-link>
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="copyright">© {{ currentYear }} YizhuEcommerce. All rights reserved.</div>
+      <div class="copyright">
+        © {{ currentYear }} YizhuEcommerce. All rights reserved.
+      </div>
     </div>
   </el-footer>
 </template>
+
 
 <script setup>
 import { ref, onMounted } from 'vue'

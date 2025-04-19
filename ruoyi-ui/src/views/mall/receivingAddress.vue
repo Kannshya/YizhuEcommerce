@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <h2>收货地址管理</h2>
+    <h2>Shipping Address Management</h2>
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
         <el-button
@@ -8,7 +8,7 @@
             plain
             icon="Plus"
             @click="handleAdd"
-        >新增</el-button>
+        >Add</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -17,7 +17,7 @@
             icon="Edit"
             :disabled="single"
             @click="handleUpdate"
-        >修改</el-button>
+        >Edit</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -26,72 +26,73 @@
             icon="Delete"
             :disabled="multiple"
             @click="handleDelete"
-        >删除</el-button>
+        >Delete</el-button>
       </el-col>
     </el-row>
 
     <el-table v-loading="loading" :data="MallAddressList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="详细地址" align="center" prop="address" />
-      <el-table-column label="收货人" align="center" prop="receiverName" />
-      <el-table-column label="手机号" align="center" prop="phoneNumber" />
-      <el-table-column label="是否默认" align="center" prop="isDefault">
+      <el-table-column label="Full Address" align="center" prop="address" />
+      <el-table-column label="Recipient" align="center" prop="receiverName" />
+      <el-table-column label="Phone Number" align="center" prop="phoneNumber" />
+      <el-table-column label="Default" align="center" prop="isDefault">
         <template #default="scope">
           <dict-tag :options="mall_yes_no" :value="scope.row.isDefault"/>
         </template>
       </el-table-column>
-      <el-table-column label="更新时间" align="center" prop="updatedTime" width="180">
+      <el-table-column label="Updated Time" align="center" prop="updatedTime" width="180">
         <template #default="scope">
           <span>{{ parseTime(scope.row.updatedTime, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="Actions" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
-          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" >修改</el-button>
-          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" >删除</el-button>
+          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" >Edit</el-button>
+          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" >Delete</el-button>
         </template>
       </el-table-column>
     </el-table>
 
     <pagination
-        v-show="total>0"
+        v-show="total > 0"
         :total="total"
         v-model:page="queryParams.pageNum"
         v-model:limit="queryParams.pageSize"
         @pagination="getList"
     />
 
-    <!-- 添加或修改收货地址对话框 -->
+    <!-- Add or Edit Shipping Address Dialog -->
     <el-dialog :title="title" v-model="open" width="500px" append-to-body>
-      <el-form ref="MallAddressRef" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="详细地址" prop="address">
-          <el-input v-model="form.address" placeholder="请输入详细地址" />
+      <el-form ref="MallAddressRef" :model="form" :rules="rules" label-width="100px">
+        <el-form-item label="Full Address" prop="address">
+          <el-input v-model="form.address" placeholder="Please enter the full address" />
         </el-form-item>
-        <el-form-item label="收货人" prop="receiverName">
-          <el-input v-model="form.receiverName" placeholder="请输入收货人" />
+        <el-form-item label="Recipient" prop="receiverName">
+          <el-input v-model="form.receiverName" placeholder="Please enter recipient name" />
         </el-form-item>
-        <el-form-item label="手机号" prop="phoneNumber">
-          <el-input v-model="form.phoneNumber" placeholder="请输入手机号" />
+        <el-form-item label="Phone Number" prop="phoneNumber">
+          <el-input v-model="form.phoneNumber" placeholder="Please enter phone number" />
         </el-form-item>
-        <el-form-item label="是否默认" prop="isDefault">
+        <el-form-item label="Default" prop="isDefault">
           <el-radio-group v-model="form.isDefault">
             <el-radio
                 v-for="dict in mall_yes_no"
                 :key="dict.value"
                 :label="parseInt(dict.value)"
-            >{{dict.label}}</el-radio>
+            >{{ dict.label }}</el-radio>
           </el-radio-group>
         </el-form-item>
       </el-form>
       <template #footer>
         <div class="dialog-footer">
-          <el-button type="primary" @click="submitForm">确 定</el-button>
-          <el-button @click="cancel">取 消</el-button>
+          <el-button type="primary" @click="submitForm">Confirm</el-button>
+          <el-button @click="cancel">Cancel</el-button>
         </div>
       </template>
     </el-dialog>
   </div>
 </template>
+
 
 <script setup name="MallAddress">
 import { listMallAddress, getMallAddress, delMallAddress, addMallAddress, updateMallAddress } from "@/api/system/MallAddress";

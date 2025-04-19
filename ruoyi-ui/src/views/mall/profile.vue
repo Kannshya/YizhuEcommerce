@@ -5,30 +5,30 @@
         <el-card class="box-card">
           <template v-slot:header>
             <div class="clearfix">
-              <span >个人信息</span>
+              <span>Profile</span>
             </div>
           </template>
           <div>
             <ul class="list-group list-group-striped">
               <li class="list-group-item">
-                <svg-icon icon-class="user" />用户名称
+                <svg-icon icon-class="user" />Username
                 <div class="pull-right">{{ state.user.userName }}</div>
               </li>
               <li class="list-group-item">
-                <svg-icon icon-class="phone" />手机号码
+                <svg-icon icon-class="phone" />Phone Number
                 <div class="pull-right">{{ state.user.phonenumber }}</div>
               </li>
               <li class="list-group-item">
-                <svg-icon icon-class="email" />用户邮箱
+                <svg-icon icon-class="email" />Email
                 <div class="pull-right">{{ state.user.email }}</div>
               </li>
               <li class="list-group-item">
-                <svg-icon icon-class="date" />创建日期
+                <svg-icon icon-class="date" />Created At
                 <div class="pull-right">{{ state.user.createTime }}</div>
               </li>
 
-              <li v-if="state.user.userType === '02'" >
-                <svg-icon icon-class="date" />营业执照
+              <li v-if="state.user.userType === '02'">
+                <svg-icon icon-class="date" />Business License
                 <div class="pull-right">
                   <image-preview :src="state.user.businessLicense" :width="200" :height="200"/>
                 </div>
@@ -41,14 +41,14 @@
         <el-card>
           <template v-slot:header>
             <div class="clearfix">
-              <span>基本资料</span>
+              <span>Basic Info</span>
             </div>
           </template>
           <el-tabs v-model="activeTab">
-            <el-tab-pane label="基本资料" name="userinfo">
+            <el-tab-pane label="Basic Info" name="userinfo">
               <userInfo :user="state.user" />
             </el-tab-pane>
-            <el-tab-pane label="修改密码" name="resetPwd">
+            <el-tab-pane label="Change Password" name="resetPwd">
               <resetPwd />
             </el-tab-pane>
           </el-tabs>
@@ -57,6 +57,7 @@
     </el-row>
   </div>
 </template>
+
 
 <script setup name="Profile">
 import userAvatar from "@/views/system/user/profile/userAvatar";

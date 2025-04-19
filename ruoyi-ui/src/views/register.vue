@@ -8,7 +8,7 @@
           type="text" 
           size="large" 
           auto-complete="off" 
-          placeholder="账号"
+          placeholder="Account"
         >
           <template #prefix><svg-icon icon-class="user" class="el-input__icon input-icon" /></template>
         </el-input>
@@ -19,7 +19,7 @@
           type="password"
           size="large" 
           auto-complete="off"
-          placeholder="密码"
+          placeholder="Password"
           @keyup.enter="handleRegister"
         >
           <template #prefix><svg-icon icon-class="password" class="el-input__icon input-icon" /></template>
@@ -31,16 +31,16 @@
             type="password"
             size="large"
             auto-complete="off"
-            placeholder="确认密码"
+            placeholder="Confirm password"
             @keyup.enter="handleRegister"
         >
           <template #prefix><svg-icon icon-class="password" class="el-input__icon input-icon" /></template>
         </el-input>
       </el-form-item>
-      <el-form-item label="用户类型" prop="userType">
+      <el-form-item label="User type" prop="userType">
         <el-radio-group v-model="registerForm.userType">
-          <el-radio label="01">用户</el-radio>
-          <el-radio label="02">商家</el-radio>
+          <el-radio label="01">Consumer</el-radio>
+          <el-radio label="02">Merchant</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item prop="email">
@@ -49,7 +49,7 @@
           type="text"
           size="large"
           auto-complete="off"
-          placeholder="邮箱地址"
+          placeholder="Email adress"
           style="width: 70%"
         >
           <template #prefix><svg-icon icon-class="email" class="el-input__icon input-icon" /></template>
@@ -60,7 +60,7 @@
           @click="toSendEmailCode"
           style="width: 28%; margin-left: 2%"
         >
-          {{ emailCodeTimer > 0 ? `${emailCodeTimer}秒后重试` : '发送验证码' }}
+          {{ emailCodeTimer > 0 ? `try ${emailCodeTimer} seconds later` : 'send code' }}
         </el-button>
       </el-form-item>
       <el-form-item prop="emailCode">
@@ -69,7 +69,7 @@
           type="text"
           size="large"
           auto-complete="off"
-          placeholder="邮箱验证码"
+          placeholder="Verification code"
         >
           <template #prefix><svg-icon icon-class="validCode" class="el-input__icon input-icon" /></template>
         </el-input>
@@ -80,7 +80,7 @@
           type="text"
           size="large"
           auto-complete="off"
-          placeholder="手机号码"
+          placeholder="Phonenumber"
         >
           <template #prefix><svg-icon icon-class="phone" class="el-input__icon input-icon" /></template>
         </el-input>
@@ -93,9 +93,9 @@
           :before-upload="beforeUpload"
           :limit="1"
         >
-          <el-button type="primary">上传营业执照</el-button>
+        <el-button type="primary">Upload Business License</el-button>
           <template #tip>
-            <div class="el-upload__tip">只能上传jpg/png文件，且不超过2mb</div>
+            <div class="el-upload__tip">Only JPG/PNG files can be uploaded, and the size must not exceed 2MB.</div>
           </template>
         </el-upload>
       </el-form-item>
@@ -105,7 +105,7 @@
           size="large" 
           v-model="registerForm.code"
           auto-complete="off"
-          placeholder="验证码"
+          placeholder="code"
           style="width: 63%"
           @keyup.enter="handleRegister"
         >
@@ -123,11 +123,11 @@
           style="width:100%;"
           @click.prevent="handleRegister"
         >
-          <span v-if="!loading">注 册</span>
-          <span v-else>注 册 中...</span>
+          <span v-if="!loading">Register</span>
+          <span v-else>Registering...</span>
         </el-button>
         <div style="float: right;">
-          <router-link class="link-type" :to="'/login'">使用已有账户登录</router-link>
+          <router-link class="link-type" :to="'/login'">Log in</router-link>
         </div>
       </el-form-item>
     </el-form>
@@ -193,25 +193,25 @@ function toSendEmailCode() {
     }
   });
 }
-
 const registerRules = {
   username: [
-    { required: true, trigger: "blur", message: "请输入您的账号" },
-    { min: 2, max: 20, message: "用户账号长度必须介于 2 和 20 之间", trigger: "blur" }
+    { required: true, trigger: "blur", message: "Please enter your username" },
+    { min: 2, max: 20, message: "Username length must be between 2 and 20 characters", trigger: "blur" }
   ],
   password: [
-    { required: true, trigger: "blur", message: "请输入您的密码" },
-    { min: 5, max: 20, message: "用户密码长度必须介于 5 和 20 之间", trigger: "blur" },
-    { pattern: /^[^<>"'|\\]+$/, message: "不能包含非法字符：< > \" ' \\\ |", trigger: "blur" }
+    { required: true, trigger: "blur", message: "Please enter your password" },
+    { min: 5, max: 20, message: "Password length must be between 5 and 20 characters", trigger: "blur" },
+    { pattern: /^[^<>"'|\\]+$/, message: "Cannot contain illegal characters: < > \" ' \\ |", trigger: "blur" }
   ],
   confirmPassword: [
-    { required: true, trigger: "blur", message: "请再次输入您的密码" },
+    { required: true, trigger: "blur", message: "Please confirm your password" },
     { required: true, validator: equalToPassword, trigger: "blur" }
   ],
-  code: [{ required: true, trigger: "change", message: "请输入验证码" }],
-  email: [{ required: true, trigger: "blur", message: "请输入邮箱地址" }],
-  emailCode: [{ required: true, trigger: "blur", message: "请输入邮箱验证码" }]
+  code: [{ required: true, trigger: "change", message: "Please enter the CAPTCHA code" }],
+  email: [{ required: true, trigger: "blur", message: "Please enter your email address" }],
+  emailCode: [{ required: true, trigger: "blur", message: "Please enter the email verification code" }]
 };
+
 
 const codeUrl = ref("");
 const loading = ref(false);
@@ -256,24 +256,24 @@ function beforeUpload(file) {
   const isLt2M = file.size / 1024 / 1024 < 2;
 
   if (!isJpgOrPng) {
-    ElMessage.error('只能上传JPG/PNG格式的图片!');
+    ElMessage.error('Only JPG/PNG images are allowed!');
     return false;
   }
   if (!isLt2M) {
-    ElMessage.error('图片大小不能超过2MB!');
+    ElMessage.error('Image size must not exceed 2MB!');
     return false;
   }
   return true;
 }
 
-// 文件上传成功的处理
+// Handle file upload success
 function handleUploadSuccess(response) {
   if (response.code === 200) {
     registerForm.value.businessLicense = response.fileName;
-    console.log(registerForm, registerForm.value)
-    ElMessage.success('营业执照上传成功');
+    console.log(registerForm, registerForm.value);
+    ElMessage.success('Business license uploaded successfully');
   } else {
-    ElMessage.error('营业执照上传失败');
+    ElMessage.error('Failed to upload business license');
   }
 }
 
@@ -286,7 +286,8 @@ getCode();
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-image: url("../assets/images/login-background.jpg");
+  background-color: #9aabaa;
+  // background-image: url("../assets/images/login-background.jpg");
   background-size: cover;
 }
 .title {

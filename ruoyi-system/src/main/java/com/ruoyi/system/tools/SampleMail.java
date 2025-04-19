@@ -68,6 +68,7 @@ public class SampleMail {
                 setHeader("Message-ID", messageIDValue);
             }
         };
+        
 
         // 设置发件人和收件人
         InternetAddress from = new InternetAddress(USER_NAME, "YizhuEcommerce");
